@@ -1,0 +1,19 @@
+$form-width: 210px; 
+
+.formGroup {
+  margin-bottom: 15px;
+
+  input, select, textarea {
+    width: $form-width; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 5px;
+}

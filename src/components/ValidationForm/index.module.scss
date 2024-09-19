@@ -1,0 +1,47 @@
+$form-width: 210px; 
+
+.formContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+label {
+  display: block; 
+  margin-bottom: 5px; 
+}
+
+.formSection {
+  flex: 1;
+  margin-right: 20px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.resultSection {
+  flex: 1;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f0f8ff;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+
+  input, select, textarea {
+    width: $form-width; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 5px;
+}
