@@ -6,6 +6,7 @@ interface DropdownFieldProps {
   fieldKey: string;
   index: number;
   options: string[] | number[];
+  value?: string | number | true;
 }
 
 const DropdownField: React.FC<DropdownFieldProps> = ({ fieldKey, index, options }) => (
