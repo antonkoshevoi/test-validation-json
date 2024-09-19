@@ -3,7 +3,17 @@
       "default_value": "",
       "validation": "^[a-zA-Z]+$",
       "type": "text",
-      "value": "Text, only a-zA-Z"
+      "value": "FirstName"
+    },
+    {
+      "default_value": "",
+      "validation": "^[a-zA-Z]+$",
+      "type": "text",
+      "value": "LastName"
+    },
+    {
+      "type": "text",
+      "default_value": "just text"
     },
     {
       "default_value": "Option 1",
@@ -21,9 +31,8 @@
       "type": "longtext"
     },
     {
-      "default_value": true,
-      "value": false,
-      "type": "text",
-      "validation": "^(true|false)$"
+      "default_value": "true",
+      "options": ["true", "false"],
+      "type": "dropdown"
     }
   ]

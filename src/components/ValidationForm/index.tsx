@@ -29,23 +29,40 @@ const ValidationForm: React.FC = () => {
 
   const generateValidationSchema = (fields: FormField[]) =>
     Yup.object().shape(
-      fields.reduce((schema, { type, validation, min_value, max_value }, index) => {
+      fields.reduce((schema, { type, validation, min_value, max_value, options }, index) => {
         const fieldKey = `field${index}`;
-        if (type === 'text' || type === 'longtext') {
-          schema[fieldKey] = Yup.string()
-            .matches(new RegExp(validation || '.*'), {
-              message: `Field ${index + 1} must contain only letters.`,
-              excludeEmptyString: true
-            })
-            .required(`Field ${index + 1} is required`);
-        } else if (type === 'number') {
-          schema[fieldKey] = Yup.number()
-            .min(min_value || 0, `Field ${index + 1} must be at least ${min_value}`)
-            .max(max_value || 100, `Field ${index + 1} must be at most ${max_value}`)
-            .required(`Field ${index + 1} is required`);
-        } else if (type === 'dropdown') {
-          schema[fieldKey] = Yup.string()
-            .required(`Field ${index + 1} is required`);
+        switch (type) {
+          case 'text':
+            if (validation === '^[a-zA-Z]+$') {
+              schema[fieldKey] = Yup.string()
+                .matches(/^[a-zA-Z]+$/, {
+                  message: `Field ${index + 1} must contain only letters (no spaces or special characters).`,
+                  excludeEmptyString: true
+                })
+                .min(1, `Field ${index + 1} must be at least 1 character long.`)
+                .required(`Field ${index + 1} is required.`);
+            } else {
+              schema[fieldKey] = Yup.string().required(`Field ${index + 1} is required.`);
+            }
+            break;
+          case 'longtext':
+            schema[fieldKey] = Yup.string()
+              .max(500, `Field ${index + 1} must be at most 500 characters long.`)
+              .required(`Field ${index + 1} is required.`);
+            break;
+          case 'dropdown':
+            schema[fieldKey] = Yup.string()
+              .required(`Field ${index + 1} is required.`);
+            break;
+          case 'number':
+            schema[fieldKey] = Yup.number()
+              .typeError(`Field ${index + 1} must be a number.`)
+              .min(min_value || 0, `Field ${index + 1} must be at least ${min_value}.`)
+              .max(max_value || 100, `Field ${index + 1} must be at most ${max_value}.`)
+              .required(`Field ${index + 1} is required.`);
+            break;
+          default:
+            break;
         }
         return schema;
       }, {} as Record<string, any>)
