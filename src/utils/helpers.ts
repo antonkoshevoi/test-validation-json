@@ -47,7 +47,7 @@ export const initializeFormValues = (fields: FormField[]) =>
   fields.reduce(
     (acc, field, index) => ({
       ...acc,
-      [`field${index}`]: field.default_value || "",
+      [`field${index}`]: field.value !== undefined ? field.value : field.default_value || '',
     }),
     {} as Record<string, any>
-  );
+  )
