@@ -1,11 +1,10 @@
-import React from 'react';
-import './App.css';
-import ValidationForm from './components/ValidationForm';
+import styles from "./index.module.scss";
+import ValidationForm from "../ValidationForm";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className={styles.app}>
+      <header className={styles.header}>
         <p>
           Test project
         </p>
