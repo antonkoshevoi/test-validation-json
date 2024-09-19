@@ -73,11 +73,11 @@ const ValidationForm: React.FC = () => {
     switch (field.type) {
       case 'text':
       case 'longtext':
-        return <TextField key={index} fieldKey={fieldKey} index={index} type={field.type} />;
+        return <TextField key={index} fieldKey={fieldKey} index={index} type={field.type} value={field.value || field.default_value || ''}/>;
       case 'number':
-        return <NumberField key={index} fieldKey={fieldKey} index={index} />;
+        return <NumberField key={index} fieldKey={fieldKey} index={index} value={field.value || field.default_value || ''}/>;
       case 'dropdown':
-        return <DropdownField key={index} fieldKey={fieldKey} index={index} options={field.options || []} />;
+        return <DropdownField key={index} fieldKey={fieldKey} index={index} options={field.options || []} value={field.value || field.default_value || ''}/>;
       default:
         return null;
     }
@@ -88,14 +88,17 @@ const ValidationForm: React.FC = () => {
       <div className={styles.formSection}>
         <h1>Dynamic Validation Form</h1>
         {formData.length > 0 && (
-          <Formik
-            initialValues={formData.reduce(
-              (acc, field, index) => ({ ...acc, [`field${index}`]: field.default_value || '' }),
-              {} as Record<string, any>
-            )}
-            validationSchema={generateValidationSchema(formData)}
-            onSubmit={(values) => setSubmittedData(values)}
-          >
+         <Formik
+         initialValues={formData.reduce(
+           (acc, field, index) => ({
+             ...acc,
+             [`field${index}`]: field.value !== undefined ? field.value : field.default_value || '',
+           }),
+           {} as Record<string, any>
+         )}
+         validationSchema={generateValidationSchema(formData)}
+         onSubmit={(values) => setSubmittedData(values)}
+       >       
             {() => (
               <Form>
                 {formData.map((field, index) => renderField(field, index))}
