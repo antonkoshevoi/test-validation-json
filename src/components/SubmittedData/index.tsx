@@ -15,7 +15,7 @@ const SubmittedData: React.FC<SubmittedDataProps> = (props) => {
       <ul>
         {Object.entries(data).map(([key, value], index) => (
           <li key={index} className={styles.submittedDataItem}>
-            <strong>{key}:</strong> {String(value)}
+            <strong>Field {index+1}:</strong> {String(value)}
           </li>
         ))}
       </ul>

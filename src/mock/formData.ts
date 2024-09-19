@@ -5,7 +5,7 @@ export const FORM_DATA: FormField[] = [
     default_value: "",
     validation: "^[a-zA-Z]+$",
     type: "text",
-    value: "Alan",
+    value: "FirstName",
   },
   {
     default_value: "Option 1",

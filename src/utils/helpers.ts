@@ -10,7 +10,7 @@ export const getValidationSchema = (fields: FormField[]) => {
       case "longtext":
         acc[fieldKey] = Yup.string()
           .matches(new RegExp(field.validation || ".*"), {
-            message: `Field ${index + 1} must contain only letters.`,
+            message: `Field ${index + 1} must contain only letters (no spaces or special characters).`,
             excludeEmptyString: true,
           })
           .required(`Field ${index + 1} is required`);
