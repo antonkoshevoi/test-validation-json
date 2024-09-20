@@ -8,7 +8,7 @@ type DropdownFieldProps = {
   options: string[] | number[];
 };
 
-const DropdownField: React.FC<DropdownFieldProps> = (props) => {
+const DropdownField: React.FC<DropdownFieldProps> = React.memo((props) => {
   const { fieldKey, index, options } = props;
 
   return (
@@ -32,6 +32,6 @@ const DropdownField: React.FC<DropdownFieldProps> = (props) => {
       </Field>
     </div>
   );
-};
+});
 
 export default DropdownField;

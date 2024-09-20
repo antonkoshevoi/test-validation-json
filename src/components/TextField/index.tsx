@@ -8,7 +8,7 @@ type TextFieldProps = {
   type: "text" | "longtext";
 };
 
-const TextField: React.FC<TextFieldProps> = (props) => {
+const TextField: React.FC<TextFieldProps> = React.memo((props) => {
   const { fieldKey, index, type } = props;
 
   return (
@@ -24,6 +24,6 @@ const TextField: React.FC<TextFieldProps> = (props) => {
       <Field name={fieldKey} as={type === "longtext" ? "textarea" : "input"} />
     </div>
   );
-};
+});
 
 export default TextField;
