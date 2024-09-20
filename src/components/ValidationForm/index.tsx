@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { Formik, Form } from "formik";
 import styles from "./index.module.scss";
 import SubmittedData from "../SubmittedData";
@@ -9,6 +9,13 @@ import { FORM_DATA } from "../../mock/formData";
 const ValidationForm: React.FC = () => {
   const [submittedData, setSubmittedData] = useState<object | null>(null);
 
+  const initialValues = useMemo(() => initializeFormValues(FORM_DATA), []);
+  const validationSchema = useMemo(() => getValidationSchema(FORM_DATA), []);
+  
+  const handleSubmit = useCallback((values: React.SetStateAction<object | null>) => {
+    setSubmittedData(values);
+  }, []);
+
   return (
     <div className={styles.formContainer}>
       <div className={styles.formSection}>
@@ -16,9 +23,9 @@ const ValidationForm: React.FC = () => {
 
         {FORM_DATA.length > 0 && (
           <Formik
-            initialValues={initializeFormValues(FORM_DATA)}
-            validationSchema={getValidationSchema(FORM_DATA)}
-            onSubmit={(values) => setSubmittedData(values)}
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
           >
             <Form>
               {FORM_DATA.map((field, index) => (

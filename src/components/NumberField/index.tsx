@@ -8,7 +8,7 @@ type NumberFieldProps = {
   index: number;
 };
 
-const NumberField: React.FC<NumberFieldProps> = (props) => {
+const NumberField: React.FC<NumberFieldProps> = React.memo((props) => {
   const { fieldKey, index } = props;
 
   return (
@@ -24,6 +24,6 @@ const NumberField: React.FC<NumberFieldProps> = (props) => {
       <Field name={fieldKey} type="number" />
     </div>
   );
-};
+});
 
 export default NumberField;
